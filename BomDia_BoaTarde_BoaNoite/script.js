@@ -22,19 +22,19 @@ switch (diaSem) {
     diaSem = 'Domingo';
     break;
   case 1:
-    diaSem = 'Segunda-feira';
+    diaSem = 'Segunda-Feira';
     break;
   case 2:
-    diaSem = 'Terça-feira';
+    diaSem = 'Terça-Feira';
     break;
   case 3:1
-    diaSem = 'Quarta-feira';
+    diaSem = 'Quarta-Feira';
     break;
   case 4:
-    diaSem = 'Quinta-feira';
+    diaSem = 'Quinta-Feira';
     break;
   case 5:
-    diaSem = 'Sexta-feira';
+    diaSem = 'Sexta-Feira';
     break;
   case 6:
     diaSem = 'Sábado';
@@ -49,14 +49,14 @@ msg2.innerHTML += `Agora são exatamente ${hora}hrs:${minuto}min:${segundo}seg.`
 if (hora >= 0 && hora < 12) {
     img.src = 'manha.png';
     document.body.style.background = '#e2cd9f';
-    msg3.innerHTML += `Tenha um <br> <strong>Ótimo Dia!</strong>`
+    msg3.innerHTML = `Tenha um <br> <strong>Ótimo Dia!</strong>`
 } else if (hora >= 12 && hora <= 18) {
     img.src = 'img/tarde.png';
-    msg3.innerHTML += `Tenha uma <br> <strong>Ótimo Tarde!</strong>`
+    msg3.innerHTML = `Tenha uma <br> <strong>Ótimo Tarde!</strong>`
     document.body.style.background = '#b9846f';
 } else {
     img.src = 'img/noite.png';
     document.body.style.background = '#515154';
-    msg3.innerHTML += `Tenha uma <br> <strong>Ótimo Noite!</strong>`
+    msg3.innerHTML = `Tenha uma <br> <strong>Ótimo Noite!</strong>`
 }
 }
