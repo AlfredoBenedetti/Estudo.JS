@@ -3,26 +3,7 @@ console.log('Feito por AlfredoBenedetti.\nDurante a aula de JavaScript. Prof. Gu
 const apiKey = '9d4da006c62569fa63644fe01a9b17ba'; // Chave de API válida
 const cidade = 'Piracicaba'; // Nome da cidade desejada
 
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}`)
-  .then(response => response.json())
-  .then(data => {
-    // Extraindo os dados relevantes
-    const temperaturaKelvin = data.main.temp;
-    const descricao = data.weather[0].description;
-    const umidade = data.main.humidity;
-    // Convertendo a temperatura para Celsius
-    const temperaturaCelsius = temperaturaKelvin - 273.15;
-    // Traduzindo a descrição
-    const traducaoDescricao = traduzirDescricao(descricao);
-    // Exibindo os dados formatados
-    console.log(`Temperatura: ${temperaturaCelsius.toFixed(0)}°C`);
-    console.log(`Descrição: ${traducaoDescricao}`);
-    console.log(`Umidade: ${umidade}%`);
-  })
-  .catch(error => {
-    console.log('Erro ao obter dados do clima:', error);
-  });
-
+// Traduzindo a descrição
 function traduzirDescricao(descricao) {
   switch (descricao) {
     case 'clear sky':
@@ -44,46 +25,43 @@ function traduzirDescricao(descricao) {
   }
 }
 
-var hora_agora = new Date(); // Criando um objeto Date
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+    // Extraindo os dados relevantes
+    const temperaturaKelvin = data.main.temp;
+    const descricao = data.weather[0].description;
+    const umidade = data.main.humidity;
+    // Convertendo a temperatura para Celsius
+    const temperaturaCelsius = temperaturaKelvin - 273.15;
+    // Traduzindo a descrição
+    const traducaoDescricao = traduzirDescricao(descricao);
+    // Exibindo os dados formatados
+    console.log(`Temperatura: ${temperaturaCelsius.toFixed(0)}°C`);
+    console.log(`Descrição: ${traducaoDescricao}`);
+    console.log(`Umidade: ${umidade}%`);
+  })
+  .catch(error => {
+    console.log('Erro ao obter dados do clima:', error);
+  });
 
-// Obtendo os valores de cada atributo
-var segundo = hora_agora.getSeconds(); // Obtendo os segundos
-var minuto = hora_agora.getMinutes(); // Obtendo os minutos
-var hora = hora_agora.getHours(); // Obtendo a hora
-var dia = hora_agora.getDate(); // Obtendo o dia
-var mes = hora_agora.getMonth(); // Obtendo o mês
-var ano = hora_agora.getFullYear(); // Obtendo o ano
-var diaSem = hora_agora.getDay(); // Obtendo o dia da semana (0-6)
-// 0 - Dom, 1 - Seg, 2 - Ter, 3 - Qua, 4 - Qui, 5 - Sex, 6 - Sáb
+// Obtendo a data e hora atual
+const hora_agora = new Date();
+const segundo = hora_agora.getSeconds();
+const minuto = hora_agora.getMinutes();
+const hora = hora_agora.getHours();
+const dia = hora_agora.getDate();
+const mes = hora_agora.getMonth() + 1; // Adicionando 1 porque os meses são indexados a partir de 0
+const ano = hora_agora.getFullYear();
+const diaSem = hora_agora.getDay();
 
-// Exibindo os valores
-switch (diaSem) {
-  case 0:
-    diaSem = 'Domingo';
-    break;
-  case 1:
-    diaSem = 'Segunda-feira';
-    break;
-  case 2:
-    diaSem = 'Terça-feira';
-    break;
-  case 3:
-    diaSem = 'Quarta-feira';
-    break;
-  case 4:
-    diaSem = 'Quinta-feira';
-    break;
-  case 5:
-    diaSem = 'Sexta-feira';
-    break;
-  case 6:
-    diaSem = 'Sábado';
-    break;
-  default:
-    break;
-}
-console.log(`Hoje é dia ${dia}/${mes}/${ano} - ${diaSem}`);
-console.log(`Agora são exatamente ${hora}hrs:${minuto}min:${segundo}seg.`);
+// Traduzindo o dia da semana
+const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+const nomeDiaSemana = diasDaSemana[diaSem];
+
+// Exibindo os valores formatados
+console.log(`Hoje é dia ${dia}/${mes}/${ano} - ${nomeDiaSemana}`);
+console.log(`Agora são exatamente ${hora}h:${minuto}min:${segundo}seg.`);
 
 // Exibindo a mensagem de boas-vindas
 if (hora < 12) {
