@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Idade</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <header>
+        <strong>Verificador de Idade</strong>
+    </header>
+    <section> 
+    <div>
+        <p>Digite o <strong>ANO DE NASCIMENTO:</strong>
+        <input type="number" name="txtdia" id="txtdia" min="0" style="width: 35px;">
+        <input type="number" name="txtmes" id="txtmes" min="0" style="width: 35px;">
+        <input type="number" name="txtano" id="txtano" min="0" style="width: 50px;">
+        </p>
+        <p>
+        Sexo:
+            <input type="radio" name="sex" id="masc" checked>
+            <label for="masc"><strong>Masculino</strong></label>
+            <input type="radio" name="sex" id="fem">
+            <label for="fem"><strong>Feminino</strong></label>
+        </p>
+        <p>
+            <input type="button" value="Verificar" onclick="verificar()">
+        </p>
+    </div>
+    <div id="res">
+        Preencha os dados acima!
+    </div>
+    </section>
+    <footer>
+        <p>&copy; Feito por: <a href=https://www.linkedin.com/in/alfredo-cezar-benedetti-918264272/>ACBenedetti</a></p>
+    </footer>
+    <script src="script.js"></script>
+    
+</body>
+</html>
