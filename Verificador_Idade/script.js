@@ -5,13 +5,19 @@ function verificar() {
     var dia = data.getDate();       // Obter o dia atual
     var fdia = window.document.querySelector('input#txtdia'); // Campo de entrada para o dia
     var fmes = window.document.querySelector('input#txtmes'); // Campo de entrada para o mês
-    var fano = window.document.querySelector('input#txtano'); // Camppo de entrada para o ano
-    var res = window.document.querySelector(`div#res`); 
- 
+    var fano = window.document.querySelector('input#txtano'); // Campo de entrada para o ano
+    var res = window.document.querySelector('div#res'); 
+
+    // Verificar se os valores dos campos de entrada são números válidos
+    if (isNaN(Number(fdia.value)) || isNaN(Number(fmes.value)) || isNaN(Number(fano.value))) {
+        res.innerHTML = '[ERRO] Insira valores numéricos para dia, mês e ano.';
+        return;
+    }
+
     // lendo e executando os cálculos de idade
-    if (fano.value.length == 0 || Number(fano.value) > ano ||
-        fmes.value.length == 0 || Number(fmes.value) > 12 ||
-        fdia.value.length == 0 || Number(fdia.value) > 31) {
+    if (fano.value.length === 0 || Number(fano.value) > ano ||
+        fmes.value.length === 0 || Number(fmes.value) > 12 ||
+        fdia.value.length === 0 || Number(fdia.value) > 31) {
         res.innerHTML = '[ERRO] Verifique os dados e tente novamente!';
     } else {
         var fsex = document.getElementsByName('sex');
@@ -24,7 +30,7 @@ function verificar() {
         var genero = '';
         var img = document.createElement('img');
         img.setAttribute('id', 'foto');
-    
+
         // lendo e classificando a idade e o sexo
         if (fsex[0].checked) {
             genero = 'Homem';
@@ -37,12 +43,7 @@ function verificar() {
             } else if (idade < 50) {
                 img.setAttribute('src', 'homem.png');
             } else if (idade < 100) {
-            // No comando abaixo, o sistema separa a data 03/10/1981 e mostra uma foto diferente
-            if (fano.value === '1981' && fmes.value === '10' && fdia.value === '03') {
-                    img.setAttribute('src', 'alfredo.png');
-                } else {
-                    img.setAttribute('src', 'idoso_h.png');
-                }
+                img.setAttribute('src', 'idoso_h.png');
             }
         } else if (fsex[1].checked) {
             genero = 'Mulher';
@@ -55,17 +56,21 @@ function verificar() {
             } else if (idade < 50) {
                 img.setAttribute('src', 'mulher.png');
             } else if (idade < 100) {
-                if (fano.value === '1981' && fmes.value === '10' && fdia.value === '3') {
-                    img.setAttribute('src', 'imagem_especial.png');
-                } else {
-                    img.setAttribute('src', 'idoso_m.png');
-                }
+                img.setAttribute('src', 'idoso_m.png');
             }
         }
-    
+
+        // Verificar se é o aniversário
+        var aniversario = (dia === Number(fdia.value) && mes === Number(fmes.value));
+
         // Exibindo os resultados
         res.style.textAlign = 'center';
         res.innerHTML = `Detectamos ${genero} com ${idade} anos.`;
         res.appendChild(img);
+
+        // Exibir se é o aniversário
+        if (aniversario) {
+            res.innerHTML += "<br>Parabéns! Hoje é o seu aniversário!";
+        }
     }
 }
